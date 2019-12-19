@@ -1,6 +1,9 @@
 # Veeam Backup for AWS Demo
 These Terraform scripts provide a demo environment to test Veeam Backup for AWS.
 
+## Disclaimer
+This is not an offically Veeam supported script. This is community driven without support.
+
 ## What will be created?
 
 - A VPC (the default limit per AWS account and region is 5 but can be increased by creating a support ticket) with a private S3 service endpoint
