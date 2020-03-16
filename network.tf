@@ -67,8 +67,8 @@ resource "aws_security_group" "public" {
     vpc_id = aws_vpc.vpc.id
 
     ingress {
-        from_port = 433
-        to_port = 433
+        from_port = 443
+        to_port = 443
         protocol = "tcp"
         cidr_blocks = ["0.0.0.0/0"]
     }
