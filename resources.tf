@@ -29,8 +29,29 @@ resource "aws_instance" "ub1" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = "t2.micro"
   subnet_id = aws_subnet.private.id
+  key_name = aws_key_pair.default.key_name
   tags = {
     Name = "${var.user}-ub1"
+  }
+}
+
+resource "aws_instance" "ub2" {
+  ami           = data.aws_ami.ubuntu.id
+  instance_type = "t2.micro"
+  subnet_id = aws_subnet.private.id
+  key_name = aws_key_pair.default.key_name
+  tags = {
+    Name = "${var.user}-ub2"
+  }
+}
+
+resource "aws_instance" "ub3" {
+  ami           = data.aws_ami.ubuntu.id
+  instance_type = "t2.micro"
+  subnet_id = aws_subnet.private.id
+  key_name = aws_key_pair.default.key_name
+  tags = {
+    Name = "${var.user}-ub3"
   }
 }
 

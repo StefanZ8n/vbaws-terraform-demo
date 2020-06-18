@@ -8,7 +8,7 @@ This is not an offically Veeam supported script. This is community driven withou
 
 - A VPC (the default limit per AWS account and region is 5 but can be increased by creating a support ticket) with a private S3 service endpoint
 - Two subnets in the VPC (private and public one)
-- One ubuntu VM (private VPC) to do backups for (`t2.micro`)
+- Three ubuntu VM (private VPC) to do backups for (`t2.micro`)
 - CloudFormation deployment Veeam Backup for AWS (`t2.medium`) in the public VPC (get's a public IP address for access)
 
 ## Requirements
