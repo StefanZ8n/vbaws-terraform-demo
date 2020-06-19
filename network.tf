@@ -1,6 +1,9 @@
+data "aws_availability_zones" "available" {
+    state = "available"
+}
 resource "aws_vpc" "vpc" {
     cidr_block = "10.42.0.0/16"
-    enable_dns_hostnames = true    
+    enable_dns_hostnames = true
     tags = {
         Name = "${var.user}-vpc"
     }
@@ -16,6 +19,7 @@ resource "aws_vpc_endpoint" "s3" {
 }
 
 resource "aws_subnet" "public" {
+    availability_zone = data.aws_availability_zones.available.names[0]
     vpc_id = aws_vpc.vpc.id
     cidr_block = "10.42.1.0/24"
     map_public_ip_on_launch = true
@@ -25,8 +29,9 @@ resource "aws_subnet" "public" {
 }
 
 resource "aws_subnet" "private" {
+    availability_zone = data.aws_availability_zones.available.names[0]
     vpc_id = aws_vpc.vpc.id
-    cidr_block = "10.42.2.0/24"        
+    cidr_block = "10.42.2.0/24"
     tags = {
         Name = "${var.user}-private"
     }
@@ -63,7 +68,7 @@ resource "aws_route_table_association" "public-internet" {
 
 resource "aws_security_group" "public" {
     name = "${var.user}-sg-public"
-    description = "Allow incoming HTTPS & SSH"
+    description = "Allow incoming HTTPS, SSH and REST-API"
     vpc_id = aws_vpc.vpc.id
 
     ingress {
@@ -81,8 +86,8 @@ resource "aws_security_group" "public" {
     }
 
     ingress {
-        from_port = 9999
-        to_port = 9999
+        from_port = 11005
+        to_port = 11005
         protocol = "tcp"
         cidr_blocks = ["0.0.0.0/0"]
     }
@@ -96,7 +101,7 @@ resource "aws_security_group" "public" {
     }
 
     tags = {
-        Name = "${var.user}-sg-public"    
+        Name = "${var.user}-sg-public"
     }
 
 }

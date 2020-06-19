@@ -1,7 +1,8 @@
 provider "aws" {
-  region                  = var.region
+  region = var.region
   shared_credentials_file = "%USERPROFILE%/.aws/credentials"
-  profile                 = "vbawsdemo"
+  profile = "vbawsdemo"
+  version = "~> 2.0"
 }
 
 resource "aws_key_pair" "default" {
@@ -14,7 +15,7 @@ data "aws_ami" "ubuntu" {
 
     filter {
         name   = "name"
-        values = ["ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*"]
+        values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
     }
 
     filter {
@@ -26,8 +27,8 @@ data "aws_ami" "ubuntu" {
 }
 
 resource "aws_instance" "ub1" {
-  ami           = data.aws_ami.ubuntu.id
-  instance_type = "t2.micro"
+  ami = data.aws_ami.ubuntu.id
+  instance_type = "t3.micro"
   subnet_id = aws_subnet.private.id
   key_name = aws_key_pair.default.key_name
   tags = {
@@ -36,8 +37,8 @@ resource "aws_instance" "ub1" {
 }
 
 resource "aws_instance" "ub2" {
-  ami           = data.aws_ami.ubuntu.id
-  instance_type = "t2.micro"
+  ami = data.aws_ami.ubuntu.id
+  instance_type = "t3.micro"
   subnet_id = aws_subnet.private.id
   key_name = aws_key_pair.default.key_name
   tags = {
@@ -46,8 +47,8 @@ resource "aws_instance" "ub2" {
 }
 
 resource "aws_instance" "ub3" {
-  ami           = data.aws_ami.ubuntu.id
-  instance_type = "t2.micro"
+  ami = data.aws_ami.ubuntu.id
+  instance_type = "t3.micro"
   subnet_id = aws_subnet.private.id
   key_name = aws_key_pair.default.key_name
   tags = {
@@ -62,12 +63,8 @@ resource "aws_cloudformation_stack" "vbaws" {
 
     parameters = {
         CreateEIP = false
-        CreateLifecyclePolicy = true
-        CreateRebootAlarm = true
-        CreateRecoveryAlarm = true
         HTTPLocation = "0.0.0.0/0"
-        InstanceType = "t2.medium"
-        SSHLocation = "0.0.0.0/0"
+        InstanceType = "t3.medium"
         KeyName = aws_key_pair.default.key_name
         VcbVpcId = aws_vpc.vpc.id
         VcbSubnetId = aws_subnet.public.id
