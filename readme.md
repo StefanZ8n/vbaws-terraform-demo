@@ -19,8 +19,14 @@ without support.
 
 ## What is NOT included?
 
-- Create your own S3 bucket for your backups - this also won't be deleted when
-  you destroy your Terraform deployment of course
+- No S3 bucket for backups is created and logically also not removed by this
+  terraform script. You have to create the bucket and clean up the data yourself
+  when you don't need it anymore.
+- Any additionally added EC2 instances won't be cleaned up of course and might
+  block the deletion of subnets, VPC, etc... - so clean them up manually when
+  required.
+- Volume snapshots created by backup policies won't be cleaned up while the
+  initially created volumes will be deleted. 
 
 ## Requirements
 
