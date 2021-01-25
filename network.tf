@@ -16,6 +16,10 @@ data "aws_vpc_endpoint_service" "s3" {
 resource "aws_vpc_endpoint" "s3" {
     vpc_id = aws_vpc.vpc.id
     service_name = data.aws_vpc_endpoint_service.s3.service_name
+
+    tags = {
+        Name = "${var.user}-s3-endpoint"
+    }
 }
 
 resource "aws_subnet" "public" {
@@ -68,7 +72,7 @@ resource "aws_route_table_association" "public-internet" {
 
 resource "aws_security_group" "public" {
     name = "${var.user}-sg-public"
-    description = "Allow incoming HTTPS, SSH and REST-API"
+    description = "Allow incoming HTTPS, SSH, RDP and REST-API"
     vpc_id = aws_vpc.vpc.id
 
     ingress {
@@ -88,6 +92,13 @@ resource "aws_security_group" "public" {
     ingress {
         from_port = 11005
         to_port = 11005
+        protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+
+    ingress {
+        from_port = 3389
+        to_port = 3389
         protocol = "tcp"
         cidr_blocks = ["0.0.0.0/0"]
     }
