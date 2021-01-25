@@ -14,7 +14,7 @@ without support.
 - Two subnets in the VPC (private and public one) within the first availability
   zone
 - Three ubuntu VMs 20.04 (private VPC) to have some backup sources (`t3.micro`)
-- CloudFormation deployment Veeam Backup for AWS (`v2.0.0` on `t3.medium`) in
+- CloudFormation deployment Veeam Backup for AWS (`v3.0.0` on `t3.medium`) in
   the public VPC (get's a public IP address for access)
 
 ## What is NOT included?
