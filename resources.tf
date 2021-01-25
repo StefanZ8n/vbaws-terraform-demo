@@ -2,12 +2,12 @@ provider "aws" {
   region = var.region
   shared_credentials_file = "%USERPROFILE%/.aws/credentials"
   profile = "vbawsdemo"
-  version = "~> 2.0"
+  
 }
 
 resource "aws_key_pair" "default" {
     key_name = "${var.user}-tf-key"
-    public_key = file("${var.key_path}")
+    public_key = file(var.key_path)
 }
 
 data "aws_ami" "ubuntu" {
