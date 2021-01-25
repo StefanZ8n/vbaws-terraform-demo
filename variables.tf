@@ -7,7 +7,7 @@ variable "user"  {
 variable "vbawstemplateurl" {
     type = string
     description = "URL to Veeam Backup for AWS Template"
-    default = "https://s3.amazonaws.com/awsmp-fulfillment-cf-templates-prod/1c943901-fa76-4b45-a69d-f2e64a121e83.76d224c0-5d22-4a00-8064-613665b3206a.template"
+    default = "https://awsmp-fulfillment-cf-templates-prod.s3-external-1.amazonaws.com/1c943901-fa76-4b45-a69d-f2e64a121e83.e5f07752-44bc-4b98-3ab9-2d47696d2d14.template"
 }
 
 variable "key_path" {
