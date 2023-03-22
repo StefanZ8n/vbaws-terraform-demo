@@ -13,8 +13,8 @@ without support.
   by creating a support ticket) with a private S3 service endpoint
 - Two subnets in the VPC (private and public one) within the first availability
   zone
-- Three ubuntu VMs 20.04 (private VPC) to have some backup sources (`t3.micro`)
-- CloudFormation deployment Veeam Backup for AWS (`v3.0.0` on `t3.medium`) in
+- Three ubuntu VMs 22.04 (private VPC) to have some backup sources (`t3.micro`)
+- CloudFormation deployment Veeam Backup for AWS (`v6.0.0` on `t3.medium`) in
   the public VPC (get's a public IP address for access)
 
 ## What is NOT included?
